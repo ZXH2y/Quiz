@@ -737,6 +737,8 @@ window.addEventListener('resize', function() {
 });
 
 console.log('🎨 Quizly Modern Theme Loaded!');
+
     </script>
+    <script src="Js/anti-screenshot.js"></script>
 </body>
 </html>
