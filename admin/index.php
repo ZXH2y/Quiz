@@ -1,23 +1,10 @@
 <?php
-/**
- * =====================================================
- * ADMIN/INDEX.PHP - Dashboard Admin
- * =====================================================
- * Fitur:
- * - Statistik sistem (total user, paket, soal, test)
- * - Grafik aktivitas user
- * - Test terbaru
- * - User terbaru
- * =====================================================
- */
 
 require_once '../config.php';
 requireLogin();
 requireAdmin();
 
-// =====================================================
 // STATISTIK SISTEM
-// =====================================================
 $total_users = $conn->query("SELECT COUNT(*) as total FROM users WHERE role='user'")->fetch_assoc()['total'];
 $total_paket = $conn->query("SELECT COUNT(*) as total FROM paket_soal")->fetch_assoc()['total'];
 $total_soal = $conn->query("SELECT COUNT(*) as total FROM soal")->fetch_assoc()['total'];
@@ -31,9 +18,7 @@ $test_hari_ini = $conn->query("SELECT COUNT(*) as total FROM hasil_test WHERE DA
 $rata_skor = $conn->query("SELECT AVG(skor) as rata FROM hasil_test")->fetch_assoc()['rata'];
 $rata_skor = $rata_skor ? round($rata_skor, 1) : 0;
 
-// =====================================================
 // TEST TERBARU (10 terakhir)
-// =====================================================
 $sql = "SELECT ht.*, u.nama_lengkap, ps.nama_paket 
         FROM hasil_test ht 
         JOIN users u ON ht.user_id = u.id 
@@ -42,15 +27,11 @@ $sql = "SELECT ht.*, u.nama_lengkap, ps.nama_paket
         LIMIT 10";
 $test_result = $conn->query($sql);
 
-// =====================================================
 // USER TERBARU (5 terakhir)
-// =====================================================
 $sql = "SELECT * FROM users WHERE role='user' ORDER BY created_at DESC LIMIT 5";
 $user_result = $conn->query($sql);
 
-// =====================================================
 // PAKET SOAL TERPOPULER
-// =====================================================
 $sql = "SELECT ps.nama_paket, COUNT(ht.id) as total_test 
         FROM paket_soal ps 
         LEFT JOIN hasil_test ht ON ps.id = ht.paket_id 

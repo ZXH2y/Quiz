@@ -15,14 +15,10 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = 20;
 $offset = ($page - 1) * $limit;
 
-// =====================================================
 // AMBIL DAFTAR PAKET UNTUK FILTER
-// =====================================================
 $paket_list = $conn->query("SELECT * FROM paket_soal WHERE status = 'aktif' ORDER BY nama_paket");
 
-// =====================================================
 // AMBIL DATA RANKING
-// =====================================================
 $where = $paket_id > 0 ? "WHERE ht.paket_id = $paket_id" : "";
 
 $sql = "SELECT 

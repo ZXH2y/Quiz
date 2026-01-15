@@ -1,34 +1,18 @@
     <?php
-    /**
-     * =====================================================
-     * TEST.PHP - Halaman Ujian
-     * =====================================================
-     * Fitur:
-     * - Timer countdown
-     * - Soal teracak setiap user (shuffle)
-     * - Navigasi soal (nomor soal)
-     * - Simpan jawaban sementara di session
-     * - Auto submit saat waktu habis
-     * - Submit manual oleh user
-     * =====================================================
-     */
-
+    
     require_once 'config.php';
     requireLogin();
     requireUser();
 
     $user_id = $_SESSION['user_id'];
 
-    // Cek parameter paket
     if (!isset($_GET['paket'])) {
         redirect('dashboard.php');
     }
 
     $paket_id = (int)$_GET['paket'];
 
-    // =====================================================
-    // AMBIL DATA PAKET
-    // =====================================================
+
     $sql = "SELECT * FROM paket_soal WHERE id = ? AND status = 'aktif'";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $paket_id);
@@ -39,12 +23,10 @@
         redirect('dashboard.php');
     }
 
-    // proses submit jawaban
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_test'])) {
         $jawaban_user = $_POST['jawaban'] ?? [];
         $waktu_pengerjaan = (int)$_POST['waktu_pengerjaan'];
         
-        // Ambil soal berdasarkan urutan yang tersimpan di session
         $urutan_soal = $_SESSION['urutan_soal_' . $paket_id];
         $sql = "SELECT * FROM soal WHERE id IN (" . implode(',', $urutan_soal) . ")";
         echo "</pre>";
@@ -58,7 +40,6 @@
             $soal_data[$row['id']] = $row;
         }
         
-        // Hitung skor
         $benar = 0;
         $salah = 0;
         $kosong = 0;
@@ -104,10 +85,8 @@
         redirect('hasil.php?id=' . $hasil_test_id);
     }
 
-    // =====================================================
     // INISIALISASI TEST
-    // =====================================================
-    // Jika belum ada session urutan soal, buat baru (SOAL TERACAK!)
+    // Jika belum ada session urutan soal, buat baru 
     if (!isset($_SESSION['urutan_soal_' . $paket_id])) {
         $sql = "SELECT id FROM soal WHERE paket_id = ? ORDER BY id";
         $stmt = $conn->prepare($sql);
@@ -120,7 +99,7 @@
             $soal_ids[] = $row['id'];
         }
         
-        // ACAK URUTAN SOAL (FITUR UTAMA!)
+        // ACAK URUTAN SOAL (
         shuffle($soal_ids);
         
         $_SESSION['urutan_soal_' . $paket_id] = $soal_ids;

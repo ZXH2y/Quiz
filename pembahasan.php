@@ -1,15 +1,4 @@
 <?php
-/**
- * =====================================================
- * PEMBAHASAN.PHP - Pembahasan Soal Detail
- * =====================================================
- * Fitur:
- * - Tampilkan semua soal dengan jawaban user
- * - Highlight jawaban benar/salah
- * - Pembahasan detail setiap soal
- * - Filter soal (semua/benar/salah/kosong)
- * =====================================================
- */
 
 require_once 'config.php';
 requireLogin();
@@ -19,13 +8,11 @@ requireUser();
 if (!isset($_GET['hasil'])) {
     redirect('dashboard.php');
 }
+// ngambil hasil stest
 
 $hasil_test_id = (int)$_GET['hasil'];
 $user_id = $_SESSION['user_id'];
 
-// =====================================================
-// AMBIL DATA HASIL TEST
-// =====================================================
 $sql = "SELECT ht.*, ps.nama_paket
         FROM hasil_test ht
         JOIN paket_soal ps ON ht.paket_id = ps.id
@@ -39,9 +26,7 @@ if (!$hasil) {
     redirect('dashboard.php');
 }
 
-// =====================================================
 // AMBIL JAWABAN DETAIL
-// =====================================================
 $sql = "SELECT jd.*, s.pertanyaan, s.pilihan_a, s.pilihan_b, s.pilihan_c, s.pilihan_d, s.pilihan_e, s.jawaban_benar, s.pembahasan
         FROM jawaban_detail jd
         JOIN soal s ON jd.soal_id = s.id
