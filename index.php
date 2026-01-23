@@ -111,6 +111,14 @@ if (isset($_GET['logout'])) {
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
+    <!-- VIDEO BACKGROUND -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="video/viedo.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
     <div class="container">
         <!-- Panel Kiri -->
         <div class="left-panel">

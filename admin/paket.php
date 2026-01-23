@@ -301,12 +301,12 @@ if (isset($_GET['edit'])) {
                 
                 <div class="form-group">
                     <label>Nama Paket <span>*</span></label>
-                    <input type="text" name="nama_paket" id="nama_paket" required placeholder="Masukkan nama paket soal">
+                    <input type="text" name="nama_paket" id="nama_paket" placeholder="Masukkan nama paket soal">
                 </div>
                 
                 <div class="form-group">
                     <label>Deskripsi <span>*</span></label>
-                    <textarea name="deskripsi" id="deskripsi" required placeholder="Deskripsi paket soal..."></textarea>
+                    <textarea name="deskripsi" id="deskripsi" placeholder="Deskripsi paket soal..."></textarea>
                 </div>
 
                 <div class="form-group">
@@ -318,17 +318,17 @@ if (isset($_GET['edit'])) {
                 
                 <div class="form-group">
                     <label>Durasi (Menit) <span>*</span></label>
-                    <input type="number" name="durasi_menit" id="durasi_menit" required value="90" min="1">
+                    <input type="number" name="durasi_menit" id="durasi_menit" value="90" min="1">
                 </div>
                 
                 <div class="form-group">
                     <label>Jumlah Soal <span>*</span></label>
-                    <input type="number" name="jumlah_soal" id="jumlah_soal" required value="35" min="1">
+                    <input type="number" name="jumlah_soal" id="jumlah_soal" value="35" min="1">
                 </div>
                 
                 <div class="form-group">
                     <label>Status <span>*</span></label>
-                    <select name="status" id="status" required>
+                    <select name="status" id="status">
                         <option value="aktif">Aktif</option>
                         <option value="nonaktif">Nonaktif</option>
                     </select>
