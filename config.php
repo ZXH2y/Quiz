@@ -1,9 +1,6 @@
 <?php
-
-
 // Mulai Session
 session_start();
-
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'andri');           

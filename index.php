@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
             
+            // menyimpan data user ke dalam sesi
             if (password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
@@ -114,7 +115,7 @@ if (isset($_GET['logout'])) {
     <!-- VIDEO BACKGROUND -->
     <div class="video-background">
         <video autoplay muted loop playsinline id="bg-video">
-            <source src="video/viedo.mp4" type="video/mp4">
+            <source src="video/blue-moon.mp4" type="video/mp4">
         </video>
         <div class="video-overlay"></div>
     </div>

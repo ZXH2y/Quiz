@@ -157,6 +157,12 @@ $lulus_count = $stmt->get_result()->fetch_assoc()['jumlah_lulus'];
                         <h3><?= e($paket['nama_paket']) ?></h3>
                         <p><?= e($paket['deskripsi']) ?></p>
                     </div>
+                    <?php 
+                    // echo("</pre>");
+                    // print_r($paket);
+                    // echo("</pre>");
+                    
+                    ?>
                     <div class="paket-body">
                         <div class="paket-info">
                             <div class="info-item">

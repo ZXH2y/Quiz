@@ -1,10 +1,4 @@
 <?php
-/**
- * =====================================================
- * LOGOUT.PHP - Logout dan Hapus Session
- * =====================================================
- */
-
 session_start();
 
 // Hapus semua session

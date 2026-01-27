@@ -1,15 +1,4 @@
 <?php
-/**
- * =====================================================
- * ADMIN/PAKET.PHP - Kelola Paket Soal
- * =====================================================
- * Fitur:
- * - CRUD paket soal (Create, Read, Update, Delete)
- * - Aktifkan/nonaktifkan paket
- * - Lihat jumlah soal per paket
- * - Modal untuk tambah/edit
- * =====================================================
- */
 
 require_once '../config.php';
 requireLogin();
@@ -18,13 +7,10 @@ requireAdmin();
 $success = '';
 $error = '';
 
-// =====================================================
-// PROSES HAPUS PAKET
-// =====================================================
+
 if (isset($_GET['delete'])) {
     $id = (int)$_GET['delete'];
     
-    // Cek apakah ada test yang menggunakan paket ini
     $sql = "SELECT COUNT(*) as total FROM hasil_test WHERE paket_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
@@ -42,9 +28,7 @@ if (isset($_GET['delete'])) {
     }
 }
 
-// =====================================================
-// PROSES TOGGLE STATUS
-// =====================================================
+
 if (isset($_GET['toggle'])) {
     $id = (int)$_GET['toggle'];
     $sql = "UPDATE paket_soal SET status = IF(status = 'aktif', 'nonaktif', 'aktif') WHERE id = ?";
@@ -57,9 +41,7 @@ if (isset($_GET['toggle'])) {
     }
 }
 
-// =====================================================
-// PROSES TAMBAH/EDIT PAKET
-// =====================================================
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
     $nama_paket = sanitize($_POST['nama_paket']);
