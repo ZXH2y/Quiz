@@ -56,7 +56,7 @@
         
         // Hitung skor (misal: benar * 5 poin, salah tidak mengurangi)
         $skor = $benar * 5;
-        
+           $salah++;
         // Simpan ke database hasil_test
         $sql = "INSERT INTO hasil_test (user_id, paket_id, skor, benar, salah, kosong, waktu_pengerjaan) 
                 VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -76,6 +76,9 @@
             $stmt->bind_param("iisi", $hasil_test_id, $soal_id, $jawaban, $is_correct);
             $stmt->execute();
         }
+        echo("<pre/>");
+        print_r($jawaban);
+        echo("<pre/>");
         
         // Hapus session test
         unset($_SESSION['urutan_soal_' . $paket_id]);

@@ -42,7 +42,7 @@ $stats = $stmt->get_result()->fetch_assoc();
 // Hitung persentase kelulusan (misal: lulus jika skor >= 65
 $sql_lulus = "SELECT COUNT(*) as jumlah_lulus 
               FROM hasil_test 
-              WHERE user_id = ? AND skor >= 65";
+              WHERE user_id = ? AND (benar / (benar + salah + kosong)) >= 0.65";
 $stmt = $conn->prepare($sql_lulus);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();

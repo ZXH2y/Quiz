@@ -141,6 +141,7 @@ if ($paket_id > 0) {
             <table>
                 <thead>
                     <tr>
+                        <th style="width: 1px; text-align: left;"></th>
                         <th style="width: 80px; text-align: center;">Rank</th>
                         <th>Nama Peserta</th>
                         <th>Paket Soal</th>

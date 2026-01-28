@@ -88,20 +88,20 @@ document.addEventListener('keydown', function(e) {
         });
 
         // Deteksi Print Screen dengan cara monitoring clipboard
-        let lastClipboard = '';
-        setInterval(async function() {
-            try {
-                const clipboardText = await navigator.clipboard.readText();
-                if (clipboardText !== lastClipboard && clipboardText.includes('Screenshot')) {
-                    hideContent();
-                    alert('⚠️ Screenshot terdeteksi! Tindakan ini akan dilaporkan.');
-                    setTimeout(showContent, 2000);
-                }
-                lastClipboard = clipboardText;
-            } catch (e) {
-                // Clipboard access blocked, itu bagus
-            }
-        }, 500);
+        // let lastClipboard = '';
+        // setInterval(async function() {
+        //     try {
+        //         const clipboardText = await navigator.clipboard.readText();
+        //         if (clipboardText !== lastClipboard && clipboardText.includes('Screenshot')) {
+        //             hideContent();
+        //             alert('⚠️ Screenshot terdeteksi! Tindakan ini akan dilaporkan.');
+        //             setTimeout(showContent, 2000);
+        //         }
+        //         lastClipboard = clipboardText;
+        //     } catch (e) {
+        //         // Clipboard access blocked, itu bagus
+        //     }
+        // }, 500);
 
     // Deteksi visibility change
     document.addEventListener('visibilitychange', function() {
