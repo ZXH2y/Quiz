@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pilihan_e = sanitize($_POST['pilihan_e']);
     $jawaban_benar = sanitize($_POST['jawaban_benar']);
     $pembahasan = sanitize($_POST['pembahasan']);
+    $bobot_poin = isset($_POST['bobot_poin']) ? (int)$_POST['bobot_poin'] : 5;
     
     if ($id > 0) {
         // Update
@@ -46,11 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 pilihan_d = ?, 
                 pilihan_e = ?, 
                 jawaban_benar = ?, 
-                pembahasan = ? 
+                pembahasan = ?,
+                bobot_poin = ? 
                 WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("issssssssi", $paket_id, $pertanyaan, $pilihan_a, $pilihan_b, $pilihan_c, 
-                         $pilihan_d, $pilihan_e, $jawaban_benar, $pembahasan, $id);
+        $stmt->bind_param("isssssssiii", $paket_id, $pertanyaan, $pilihan_a, $pilihan_b, $pilihan_c, 
+                 $pilihan_d, $pilihan_e, $jawaban_benar, $pembahasan, $bobot_poin, $id);
         
         if ($stmt->execute()) {
             $success = "Soal berhasil diupdate!";
@@ -60,11 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Insert
         $sql = "INSERT INTO soal (paket_id, pertanyaan, pilihan_a, pilihan_b, pilihan_c, pilihan_d, 
-                pilihan_e, jawaban_benar, pembahasan) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        pilihan_e, jawaban_benar, pembahasan, bobot_poin) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("issssssss", $paket_id, $pertanyaan, $pilihan_a, $pilihan_b, $pilihan_c, 
-                         $pilihan_d, $pilihan_e, $jawaban_benar, $pembahasan);
+        $stmt->bind_param("issssssssi", $paket_id, $pertanyaan, $pilihan_a, $pilihan_b, $pilihan_c, 
+                        $pilihan_d, $pilihan_e, $jawaban_benar, $pembahasan, $bobot_poin);
         
         if ($stmt->execute()) {
             $success = "Soal berhasil ditambahkan!";
@@ -188,6 +190,7 @@ $soal_result = $conn->query($sql);
                             <th>Paket</th>
                             <th>Pertanyaan</th>
                             <th>Jawaban</th>
+                            <th>Bobot</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -205,6 +208,11 @@ $soal_result = $conn->query($sql);
                                 <td>
                                     <span class="badge badge-<?= strtolower($soal['jawaban_benar']) ?>">
                                         <?= strtoupper($soal['jawaban_benar']) ?>
+                                    </span>
+                                </td>
+                                 <td>
+                                    <span class="badge badge-<?= strtolower($soal['bobot_poin']) ?>">
+                                        <?= strtoupper($soal['bobot_poin']) ?>
                                     </span>
                                 </td>
                                 <td>
@@ -299,6 +307,11 @@ $soal_result = $conn->query($sql);
                 </div>
                 
                 <div class="form-group">
+                    <label>Bobot Poin <span>*</span></label>
+                    <input type="number" name="bobot_poin" id="bobot_poin" required min="1" max="100" value="5" placeholder="Masukkan bobot poin (default: 5)">
+                    <small style="color: #666; font-size: 13px;">Poin yang didapat jika menjawab benar</small>
+                </div>
+                <div class="form-group">
                     <label>Pembahasan</label>
                     <textarea name="pembahasan" id="pembahasan" placeholder="Tuliskan pembahasan soal (opsional)"></textarea>
                 </div>
@@ -350,8 +363,9 @@ $soal_result = $conn->query($sql);
                     document.getElementById('pilihan_c').value = data.pilihan_c;
                     document.getElementById('pilihan_d').value = data.pilihan_d;
                     document.getElementById('pilihan_e').value = data.pilihan_e;
-                    document.getElementById('jawaban_benar').value = data.jawaban_benar;
+                    document.getElementById('bobot_poin').value = data.bobot_poin || 5; 
                     document.getElementById('pembahasan').value = data.pembahasan;
+                    document.getElementById('bobot_point').value = data.bobot_point || 5;
                     document.getElementById('modalSoal').classList.add('active');
                 })
                 .catch(error => {

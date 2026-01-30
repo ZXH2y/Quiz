@@ -55,7 +55,12 @@
         }
         
         // Hitung skor (misal: benar * 5 poin, salah tidak mengurangi)
-        $skor = $benar * 5;
+        $skor = 0;
+            foreach ($urutan_soal as $soal_id) {
+                if (isset($jawaban_user[$soal_id]) && $jawaban_user[$soal_id] == $soal_data[$soal_id]['jawaban_benar']) {
+                    $skor += (int)$soal_data[$soal_id]['bobot_poin'];
+                }
+            }
            $salah++;
         // Simpan ke database hasil_test
         $sql = "INSERT INTO hasil_test (user_id, paket_id, skor, benar, salah, kosong, waktu_pengerjaan) 
