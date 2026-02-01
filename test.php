@@ -61,7 +61,7 @@
                     $skor += (int)$soal_data[$soal_id]['bobot_poin'];
                 }
             }
-           $salah++;
+        
         // Simpan ke database hasil_test
         $sql = "INSERT INTO hasil_test (user_id, paket_id, skor, benar, salah, kosong, waktu_pengerjaan) 
                 VALUES (?, ?, ?, ?, ?, ?, ?)";

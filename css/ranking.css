@@ -1312,16 +1312,16 @@ tr.current-user td {
     }
     
     tbody tr:nth-child(even) {
-        background: #f8fafc !important;
+        background: #0f172a !important;
     }
     
     tbody tr:nth-child(odd) {
-        background: white !important;
+        background: #0f172a !important;
     }
     
     /* Current user print */
     tr.current-user {
-        background: #e0f7fa !important;
+        background: #0f172a !important;
     }
     
     tr.current-user::before {
@@ -1351,7 +1351,7 @@ tr.current-user td {
     .rank-num {
         font-size: 14pt !important;
         font-weight: 800 !important;
-        color: #64748b !important;
+        color: #0f172a !important;
     }
     
     .rank-1 .rank-num { color: #d4a000 !important; }

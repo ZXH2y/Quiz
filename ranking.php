@@ -268,7 +268,7 @@ $file_date = date('Ymd_His');
                     <table>
                         <thead>
                             <tr>
-                                <th class="th-spasi"></th>
+                                <!-- <th class="th-spasi"></th> -->
                                 <th class="th-rank">Rank</th>
                                 <th class="th-name">Nama Peserta</th>
                                 <th class="th-paket">Paket Soal</th>
@@ -301,7 +301,7 @@ $file_date = date('Ymd_His');
                                     $rank_class = 'rank-3';
                                 }
                             ?>
-                            <tr class="<?= $is_current_user ? 'current-user' : '' ?>" data-rank="<?= $rank ?>">
+                            <!-- <tr class="<?= $is_current_user ? 'current-user' : '' ?>" data-rank="<?= $rank ?>"> -->
                                 <td class="td-rank">
                                     <div class="rank-cell <?= $rank_class ?>">
                                         <?php if ($medal): ?>
